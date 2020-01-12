@@ -17,3 +17,36 @@
 - @BeforeAll / @AfterAll
 - @BeforeEach / @AfterEach
 - @Disabled
+
+## 테스트 이름 표시 방법
+> 테스트 이름 기본 표기 전략은 메서드 이름으로 설정된다
+
+1. @DisplayNameGeneration
+    ```java
+    @DisplayName("Custom Test Case")
+    @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+    class CustomTest {
+    
+        @Test
+        void custom_test() {
+            // Test Code
+        }
+    }
+    ```
+
+2. @DisplayName
+    ```java
+   @DisplayName("Custom Test Case")
+   class CustomTest {
+       
+       @Test
+       @DisplayName("Test Method Name")
+       void custom_test() {
+           // Test Code
+       }
+   }
+    ```
+
+## 참고자료
+- 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
+- https://junit.org/junit5/docs/current/user-guide
