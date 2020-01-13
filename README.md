@@ -46,6 +46,13 @@
        }
    }
     ```
+## Assertion
+- assertEquals(expected, actual)
+- assertNotNull(actual)
+- assertTrue(boolean)
+- assertAll(executables)
+- assertThrows(expectedType, executable)
+- assertTimeout(duration, executable)
 
 ## 참고자료
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
