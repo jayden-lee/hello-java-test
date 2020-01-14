@@ -53,6 +53,15 @@
 - assertAll(executables)
 - assertThrows(expectedType, executable)
 - assertTimeout(duration, executable)
+- ...
+
+## 조건에 따라 테스트 실행하기
+- assumeTrue(boolean)
+- assumingThat(boolean, executable)
+- @EnabledOnOs({OS.MAC, OS.WINDOWS, OS.LINUX})
+- @EnabledOnJre({JRE.JAVA_8, JRE.JAVA_11})
+- @EnabledIfEnvironmentVariable(named, matches)
+- ...
 
 ## 참고자료
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의

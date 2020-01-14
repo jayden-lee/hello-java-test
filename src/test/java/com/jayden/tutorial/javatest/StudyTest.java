@@ -1,6 +1,8 @@
 package com.jayden.tutorial.javatest;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import java.time.Duration;
 
@@ -22,6 +24,7 @@ class StudyTest {
 
     @Test
     @DisplayName("create_1")
+    @EnabledOnOs({OS.MAC, OS.WINDOWS, OS.LINUX})
     void create_1() {
         System.out.println("create_1");
         Study study = new Study();
