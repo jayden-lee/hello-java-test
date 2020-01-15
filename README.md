@@ -63,6 +63,68 @@
 - @EnabledIfEnvironmentVariable(named, matches)
 - ...
 
+## 태깅과 필터링
+
+### 태깅
+> 테스트를 태깅함으로써 프로파일에 따라 테스트 그룹화 할 수 있다
+
+```java
+class CustomTest {
+    @Test
+    @Tag("local")
+    void testMethod1() {
+        // Test Code
+    }
+    
+    @Test
+    @Tag("alpha")
+    void testMethod2() {
+        // Test Code
+    }
+}
+```
+
+### IntelliJ 태깅 설정
+
+<img width="1133" alt="JUnit-Tag-Configuration" src="https://user-images.githubusercontent.com/43853352/72307556-0a236780-36be-11ea-99ca-4d8aa7af9a17.png">
+
+### Maven Profile 설정
+
+```xml
+<profiles>
+    <profile>
+        <id>default</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <build>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <groups>local</groups>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+    <profile>
+        <id>alpha</id>
+        <build>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <groups>local | alpha</groups>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+</profiles>
+```
+
+
 ## 참고자료
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
 - https://junit.org/junit5/docs/current/user-guide

@@ -25,6 +25,7 @@ class StudyTest {
     @Test
     @DisplayName("create_1")
     @EnabledOnOs({OS.MAC, OS.WINDOWS, OS.LINUX})
+    @Tag("local")
     void create_1() {
         System.out.println("create_1");
         Study study = new Study();
@@ -37,6 +38,7 @@ class StudyTest {
     }
 
     @Test
+    @Tag("alpha")
     void create_2() {
         System.out.println("create_2");
         Study study = new Study();
