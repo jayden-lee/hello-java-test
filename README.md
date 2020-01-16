@@ -174,6 +174,35 @@ JUnit5부터는 <code>@TestInstance</code> 어노테이션으로 테스트 인�
 - TestInstance.Lifecycle.PER_CLASS
 - TestInstance.Lifecycle.PER_METHOD
 
+## 테스트 순서
+테스트 메서드를 원하는 순서대로 실행하기를 기대한다면 두 가지 설정을 해줘야 한다. 먼저 테스트 클래스 인스턴스를
+하나만 생성하도록 <code>@TestInstance</code> 어노테이션을 설정하고, 다음으로 <code>@TestMethodOrder</code> 어노테이션을
+설정한다
+
+### MethodOrder 구현체
+- Alphanumeric
+- OrderAnnotation
+- Random
+
+> OrderAnnotation 구현체를 사용할 때 Order 어노테이션을 설정하는데, Order 값이 낮을수록 더 우선순위를 갖고 먼저 실행된다
+
+```java
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrder.OrderAnnotation.class)
+class CustomTest {
+    
+    @Order(1)
+    void test1() {
+        // Test Code
+    }
+
+    @Order(2)
+    void test1() {
+        // Test Code
+    }
+}
+```
+
 ## 참고자료
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
 - https://junit.org/junit5/docs/current/user-guide
