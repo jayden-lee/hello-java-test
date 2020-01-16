@@ -166,6 +166,13 @@ void parameterizedTest(String value) {
     }
     ```
 
+## 테스트 인스턴스
+> 각 테스트마다 의존성을 없애기 위해서 기본 전략으로 테스트 메서드마다 테스트 인스턴스를 생성한다
+
+JUnit5부터는 <code>@TestInstance</code> 어노테이션으로 테스트 인스턴스의 전략을 설정할 수 있다
+
+- TestInstance.Lifecycle.PER_CLASS
+- TestInstance.Lifecycle.PER_METHOD
 
 ## 참고자료
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
