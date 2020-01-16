@@ -124,6 +124,48 @@ class CustomTest {
 </profiles>
 ```
 
+## 테스트 반복하기
+
+### RepeatedTest
+```java
+@DisplayName("반복 테스트")
+@RepeatedTest(value = 5, name = "{displayName} :: repetition {currentRepetition} of {totalRepetitions}")
+void repeatedTest(RepetitionInfo repetitionInfo) {
+    // Test Code
+}
+```
+
+### ParameterizedTest 
+```java
+@DisplayName("파라미터 테스트")
+@ParameterizedTest(name = "{index} {displayName} value={0}")
+@ValueSource(strings = {"A", "B", "C"})
+@NullAndEmptySource
+void parameterizedTest(String value) {
+    // Test Code
+}
+```
+
+- 하나의 파라미터 값을 변경해서 아규먼트에 넘겨줄 때는 <code>@ConvertWith</code> 어노테이션에 <code>SimpleArgumentConverter</code>를
+구현한 클래스를 명시한다
+    ```java
+    @ParameterizedTest
+    @ValueSource(strings = {"A", "B", "C"})
+    void test(@ConvertWith(CustomArgumentConverter.class) Study study) {
+          // Test Code
+    }
+    ```
+  
+- 2개 이상의 아규먼트를 처리할 때는 <code>ArgumentAccessor</code>를 사용하는 방법과 <code>ArgumentsAggregator</code> 인터페이스를 구현한 클래스와
+<code>AggregateWith</code> 어노테이션을 함께 사용하는 방법이 있다
+    ```java
+    @ParameterizedTest
+    @CsvSource({"10, 이름1", "20, 이름2"})
+    void test(@AggregateWith(CustomAggregator.class) Study study) {
+          // Test Code
+    }
+    ```
+
 
 ## 참고자료
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의

@@ -3,6 +3,9 @@ package com.jayden.tutorial.javatest;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.Duration;
 
@@ -70,6 +73,21 @@ class StudyTest {
             new Study(10);
             Thread.sleep(1000);
         });
+    }
+
+    @DisplayName("반복 테스트")
+    @RepeatedTest(value = 5, name = "{displayName} :: repetition {currentRepetition} of {totalRepetitions}")
+    void repeated_create_6(RepetitionInfo repetitionInfo) {
+        System.out.println(repetitionInfo.getCurrentRepetition() + "/" + repetitionInfo.getTotalRepetitions());
+        System.out.println("test");
+    }
+
+    @DisplayName("파라미터 테스트")
+    @ParameterizedTest(name = "{index} {displayName} value={0}")
+    @ValueSource(strings = {"A", "B", "C"})
+    @NullAndEmptySource
+    void parameterizedTest(String value) {
+        System.out.println(value);
     }
 
     @AfterEach
