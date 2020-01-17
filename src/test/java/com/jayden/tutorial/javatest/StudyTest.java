@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Study Test Case")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class StudyTest {
 
     @BeforeAll

@@ -203,6 +203,24 @@ class CustomTest {
 }
 ```
 
+## JUnit Platform Properties
+> <code>src/test/resources/junit-platform.properties</code> 파일을 생성하고 옵션을 설정한다
+
+```properties
+# 테스트 라이프사이클 지정
+junit.jupiter.testinstance.lifecycle.default = per_class
+
+# 확장팩 자동 감지 기능 설정
+junit.jupiter.extensions.autodetection.enabled = true
+
+# 특정 기능 무시하고 실행하기 설정
+junit.jupiter.conditions.deactivate = org.junit.*DisabledCondition
+
+# 테스트 이름 표기 전략 설정
+junit.jupiter.displayname.generator.default = \
+    org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
+```
+
 ## 참고자료
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
 - https://junit.org/junit5/docs/current/user-guide
