@@ -221,6 +221,30 @@ junit.jupiter.displayname.generator.default = \
     org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
 ```
 
+## Extension
+
+### Extension 등록 방법
+1. @ExtendWith
+    ```java
+   @ExtendWith(CustomExtension.class)
+   class CustomTest {
+   }
+    ```
+
+2. @RegisterExtension
+    ```java
+    class CustomTest {
+           @RegisterExtendsion
+           static CustomExtension customExtension = new CustomExtension();
+    }
+    ```
+   
+3. ServiceLoader
+    ```properties
+    # Extension 자동 감지 기능
+    junit.jupiter.extensions.autodetection.enabled = true
+    ```
+
 ## 참고자료
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
 - https://junit.org/junit5/docs/current/user-guide
