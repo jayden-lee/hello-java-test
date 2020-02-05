@@ -272,6 +272,44 @@ Spring Boot 2.2 이상 버전의 프로젝트를 생성하면, <code>spring-boot
 </dependencies>
 ```
 
+## Mock 객체 생성
+
+### Mockito 클래스의 mock 메서드
+```java
+MemberService memberService = Mockito.mock(MemberService.class);
+```
+
+### 애노테이션
+반드시 @Mock 애노테이션을 처리할 <code>MockitoExtension</code>을 추가해야 한다.
+
+```java
+@ExtendWith(MockitoExtension.class)
+class StudyServiceTest {
+
+    @Mock
+    MemberService memberService;
+
+    @Mock
+    StudyRepository studyRepository;
+}
+```
+
+특정 메서드에서만 Mock 객체를 사용할 경우에는 파라미터에 추가해서 메서드 범위에서만 사용하도록 설정할 수 있다.
+
+```java
+@ExtendWith(MockitoExtension.class)
+class StudyServiceTest {
+
+    @Test
+    void createStudyServiceInstance(@Mock MemberService memberService,
+                                    @Mock StudyRepository studyRepository) {
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        assertNotNull(studyService);
+    }
+}
+```
+
+
 ## References
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
 - [JUnit5 User Guide](https://junit.org/junit5/docs/current/user-guide)

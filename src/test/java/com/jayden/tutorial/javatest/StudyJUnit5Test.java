@@ -1,5 +1,7 @@
 package com.jayden.tutorial.javatest;
 
+import com.jayden.tutorial.javatest.domain.Study;
+import com.jayden.tutorial.javatest.domain.StudyStatus;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -31,12 +33,12 @@ class StudyJUnit5Test {
     @Tag("local")
     void create_1() {
         System.out.println("create_1");
-        Study study = new Study();
+        Study study = new Study(10);
 
         assertAll(
             () -> assertNotNull(study),
             () -> assertEquals(StudyStatus.DRAFT, study.getStatus(), "Study 객체를 처음 만들면 상태값이 DRAFT여야 한다."),
-            () -> assertTrue(study.getLimit() > 0, "스터디 최대 참석 가능 인원은 0보다 커야 한다.")
+            () -> assertTrue(study.getLimitCount() > 0, "스터디 최대 참석 가능 인원은 0보다 커야 한다.")
         );
     }
 
@@ -44,7 +46,7 @@ class StudyJUnit5Test {
     @Tag("alpha")
     void create_2() {
         System.out.println("create_2");
-        Study study = new Study();
+        Study study = new Study(10);
         assertNotNull(study);
     }
 
@@ -53,7 +55,7 @@ class StudyJUnit5Test {
     @Disabled
     void create_3() {
         System.out.println("create_3");
-        Study study = new Study();
+        Study study = new Study(10);
         assertNotNull(study);
     }
 
