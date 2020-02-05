@@ -11,9 +11,9 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Study Test Case")
+@DisplayName("Study JUnit5 Test Case")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-class StudyTest {
+class StudyJUnit5Test {
 
     @BeforeAll
     static void beforeAll() {
@@ -69,7 +69,7 @@ class StudyTest {
     @Test
     @DisplayName("create 5")
     void create_5() {
-        assertTimeoutPreemptively(Duration.ofMillis(500), () -> {
+        assertTimeoutPreemptively(Duration.ofMillis(5000), () -> {
             new Study(10);
             Thread.sleep(1000);
         });
