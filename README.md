@@ -309,6 +309,32 @@ class StudyServiceTest {
 }
 ```
 
+## Mock 객체 Stubbing
+- 특정 매개변수가 주어진 경우에 원하는 결과값이 반환되거나 에러가 발생하게 조작할 수 있다.
+```java
+Member member = new Member(1L, "jayden@chequer.io");
+
+when(memberService.findById(1L)).thenReturn(Optional.of(member));
+
+assertEquals("jayden@chequer.io",memberService.findById(1L).get().getEmail());
+```
+
+- 동일한 매개변수로 여러번 호출할 때, 각각 다르게 행동할 수 있도록 조작할 수 있다.
+```java
+when(memberService.findById(any()))
+    .thenReturn(Optional.of(member)) // 첫 번째 호출에는 Optional에 감싸진 member 객체 반환 
+    .thenThrow(new RuntimeException()) // 두 번째 호출에는 에러 발생
+    .thenReturn(Optional.empty()); // 세 번째는 Optional 빈 값을 반환
+```
+
+- Void 메서드에서 특정 매개변수를 받게 되면 에러를 발생 시킬 수 있다.
+```java
+doThrow(new IllegalArgumentException()).when(memberService).validate(1L);
+
+assertThrows(IllegalArgumentException.class,() -> {
+    memberService.validate(1L);
+});
+```
 
 ## References
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
