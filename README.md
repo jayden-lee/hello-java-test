@@ -1,7 +1,7 @@
 # Java Test Study Repo
 > 인프런 자바 테스트 강좌를 학습하고 정리한 내용입니다
 
-## JUnit
+# JUnit
 - 자바 개발자가 가장 많이 사용하는 단위 테스팅 프레임워크
 - 2017년 10월 JUni5가 공개 되었고, 기존 프로젝트에서는 JUnit4를 사용했었음
 - 최근 Spring Boot 2.2+ 버전에서는 기본 JUnit 버전을 JUnit5로 채택함
@@ -148,23 +148,23 @@ void parameterizedTest(String value) {
 
 - 하나의 파라미터 값을 변경해서 아규먼트에 넘겨줄 때는 <code>@ConvertWith</code> 어노테이션에 <code>SimpleArgumentConverter</code>를
 구현한 클래스를 명시한다
-    ```java
-    @ParameterizedTest
-    @ValueSource(strings = {"A", "B", "C"})
-    void test(@ConvertWith(CustomArgumentConverter.class) Study study) {
-          // Test Code
-    }
-    ```
+```java
+@ParameterizedTest
+@ValueSource(strings = {"A", "B", "C"})
+void test(@ConvertWith(CustomArgumentConverter.class) Study study) {
+      // Test Code
+}
+```
   
 - 2개 이상의 아규먼트를 처리할 때는 <code>ArgumentAccessor</code>를 사용하는 방법과 <code>ArgumentsAggregator</code> 인터페이스를 구현한 클래스와
 <code>AggregateWith</code> 어노테이션을 함께 사용하는 방법이 있다
-    ```java
-    @ParameterizedTest
-    @CsvSource({"10, 이름1", "20, 이름2"})
-    void test(@AggregateWith(CustomAggregator.class) Study study) {
-          // Test Code
-    }
-    ```
+```java
+@ParameterizedTest
+@CsvSource({"10, 이름1", "20, 이름2"})
+void test(@AggregateWith(CustomAggregator.class) Study study) {
+      // Test Code
+}
+```
 
 ## 테스트 인스턴스
 > 각 테스트마다 의존성을 없애기 위해서 기본 전략으로 테스트 메서드마다 테스트 인스턴스를 생성한다
@@ -224,27 +224,55 @@ junit.jupiter.displayname.generator.default = \
 ## Extension
 
 ### Extension 등록 방법
-1. @ExtendWith
-    ```java
-   @ExtendWith(CustomExtension.class)
-   class CustomTest {
-   }
-    ```
+1.@ExtendWith
+```java
+@ExtendWith(CustomExtension.class)
+class CustomTest {
+}
+```
 
-2. @RegisterExtension
-    ```java
-    class CustomTest {
-           @RegisterExtendsion
-           static CustomExtension customExtension = new CustomExtension();
-    }
-    ```
+2.@RegisterExtension
+```java
+class CustomTest {
+       @RegisterExtendsion
+       static CustomExtension customExtension = new CustomExtension();
+}
+```
    
-3. ServiceLoader
-    ```properties
-    # Extension 자동 감지 기능
-    junit.jupiter.extensions.autodetection.enabled = true
-    ```
+3.ServiceLoader
+```properties
+# Extension 자동 감지 기능
+junit.jupiter.extensions.autodetection.enabled = true
+```
 
-## 참고자료
+<hr/>
+
+# [Mockito](https://site.mockito.org/)
+- Mock: 실제 객체와 비슷하게 동작하지만 프로그래머가 직접 그 객체의 행동을 관리하는 객체
+- Mockito: Mock 객체를 쉽게 만들고 관리 및 검증할 수 있는 방법을 제
+
+## Mockito 모듈 추가
+Spring Boot 2.2 이상 버전의 프로젝트를 생성하면, <code>spring-boot-starter-test</code> 모듈이 Mockito 모듈을 추가해준다. 직접 추가하기 위해서는
+아래 디펜던시를 추가해준다.
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>3.2.4</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-junit-jupiter</artifactId>
+        <version>3.2.4</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+## References
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
-- https://junit.org/junit5/docs/current/user-guide
+- [JUnit5 User Guide](https://junit.org/junit5/docs/current/user-guide)
+- [Mockito Core Doc](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)
