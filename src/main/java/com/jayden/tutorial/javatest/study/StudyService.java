@@ -25,6 +25,10 @@ public class StudyService {
 
         study.setOwnerId(member.getId());
 
-        return studyRepository.save(study);
+        Study newStudy = studyRepository.save(study);
+        memberService.notify(newStudy);
+        memberService.notify(member);
+
+        return newStudy;
     }
 }

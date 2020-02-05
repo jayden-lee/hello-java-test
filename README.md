@@ -336,6 +336,26 @@ assertThrows(IllegalArgumentException.class,() -> {
 });
 ```
 
+## Mock 객체 확인
+```java
+// 특정 메서드를 1번 호출하는지 검증
+verify(mock, times(1)).someMethod(any());
+
+// 특정 메서드를 호출하지 않았는지 검증
+verify(mock, never()).someMethod(any());
+
+// 순서 검증
+InOrder inOrder = inOrder(mock);
+inOrder.verify(mock).notify(someMethod);
+inOrder.verify(mock).notify(someMethod);
+
+// 더 이상 인터렉션 해야 하는 것이 없다는 검증
+verifyNoMoreInteractions(mock);
+
+// 특정 시간 내에 메서드가 몇 번 호출 되었는지 검증
+verify(mock, timeout(100).times(2)).someMethod();
+```
+
 ## References
 - 인프런 "더 자바, 애플리케이션을 테스트하는 다양한 방법" 강의
 - [JUnit5 User Guide](https://junit.org/junit5/docs/current/user-guide)
